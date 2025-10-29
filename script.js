@@ -37,6 +37,8 @@ let score = 0;
 
 let questionh = document.getElementById("question");
 let submit = document.getElementById("submit");
+let collect = document.getElementById("collect");
+
 
 let a_text = document.getElementById("a_text");
 let b_text = document.getElementById("b_text");
@@ -60,10 +62,40 @@ a.value = questionsobj[indx].a;
 b.value = questionsobj[indx].b;
 c.value = questionsobj[indx].c;
 d.value = questionsobj[indx].d;
+
+a.checked = false;
+b.checked = false;
+c.checked = false;
+d.checked = false;
 	
 }
 if(current == 0){
 	setter(current)
 }
+submit.addEventListener("click",()=>{
+	const radios = document.getElementsByName("options");
+	let ischecked = false;
+	let userchoose = "";
 
+	for(let val of radios){
+		if(val.checked){
+			userchoose = val.value;
+			ischecked = true;
+			break;
+		}
+	}
+	let ans = questionsobj[current];
+	
+	if(userchoose == ans[questionsobj[current].correct]){
+		score+=1;
+	}
+	
+	if((current < 4) && ischecked){
+		setter(current+=1);
+	}
+	if(current == 3){
+		collect.innerHTML = "";
+		questionh.textContent = `You answered ${score}/4 questions correctly`
+	}
+})
 
