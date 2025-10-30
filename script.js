@@ -58,11 +58,6 @@ function setter(indx) {
   c_text.textContent = questionsobj[indx].c;
   d_text.textContent = questionsobj[indx].d;
 
-  a.value = questionsobj[indx].a;
-  b.value = questionsobj[indx].b;
-  c.value = questionsobj[indx].c;
-  d.value = questionsobj[indx].d;
-
   a.checked = false;
   b.checked = false;
   c.checked = false;
@@ -82,6 +77,12 @@ submit.addEventListener("click", () => {
     }
   }
 
+  // ✅ Do not move to next question if no option is selected
+  if (userchoose === "") {
+    alert("Please select an answer before submitting!");
+    return;
+  }
+
   if (userchoose === questionsobj[current].correct) {
     score++;
   }
@@ -91,10 +92,10 @@ submit.addEventListener("click", () => {
   if (current < questionsobj.length) {
     setter(current);
   } else {
-	questionh.textContent = "";
+    questionh.textContent = "";
     collect.innerHTML = "";
-	let ans = document.getElementById("ans");
-	ans.style.display = "initial";
-	ans.textContent = `You answered ${score}/4 questions correctly`;
+    let ans = document.getElementById("ans");
+    ans.style.display = "initial";
+    ans.textContent = `You answered ${score}/${questionsobj.length} questions correctly`;
   }
 });
