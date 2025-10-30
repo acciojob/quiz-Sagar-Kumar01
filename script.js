@@ -77,7 +77,7 @@ submit.addEventListener("click", () => {
 
   for (let val of radios) {
     if (val.checked) {
-      userchoose = val.id; // get the id (a, b, c, or d)
+      userchoose = val.id;
       break;
     }
   }
@@ -91,7 +91,10 @@ submit.addEventListener("click", () => {
   if (current < questionsobj.length) {
     setter(current);
   } else {
+	questionh.textContent = "";
     collect.innerHTML = "";
-    questionh.textContent = `You answered ${score}/4 questions correctly`;
+	let ans = document.getElementById("ans");
+	ans.style.display = "initial";
+	ans.textContent = `You answered ${score}/4 questions correctly`;
   }
 });
